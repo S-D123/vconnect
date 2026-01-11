@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="login">
+        <input type="text" placeholder="Username"><br><br>
+        <input type="password" placeholder="Password"><br><br>
+        <button type="submit" onclick="handleLogin()">Login</button>
+    </div>
+    <div class="home hide">
+    <header>
+
+        <h1>Welcome to Our Social Media Platform</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Messages</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#" onclick="handleLogout()">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="post-creation">
+            <h2>Create a Post</h2>
+            <textarea id="postContent" placeholder="What's on your mind?"></textarea>
+            <input type="file" id="postMedia" accept="image/*,video/*">
+            <input type="url" id="postLink" placeholder="Add a hyperlink (optional)">
+            <button id="postButton">Post</button>
+        </section>
+        <section class="feed">
+            <h2>Feed</h2>
+            <div id="feedContainer">
+                <div class="post">
+                    <p>User1: This is a sample post!</p>
+                </div>
+                <div class="post">
+                    <p>User2: Another interesting update!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Social Media Website</p>
+    </footer>
+    </div>
+    <script src="scripts.js"></script>
+
+</body>
+
+</html>
