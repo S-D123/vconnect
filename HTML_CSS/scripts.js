@@ -9,9 +9,15 @@ handleLogout = () => {
 }
 
 document.getElementById('postButton').addEventListener('click', function () {
-    const content = document.getElementById('postContent').value;
+    const content = document.getElementById('postContent').value.trim();
     const media = document.getElementById('postMedia').files[0];
-    const link = document.getElementById('postLink').value;
+    const link = document.getElementById('postLink').value.trim();
+
+    // Prevent creating a new post if all inputs are empty
+    if (!content && !media && !link) {
+        alert('Please provide content, media, or a link to create a post.');
+        return;
+    }
 
     const feedContainer = document.getElementById('feedContainer');
     const postDiv = document.createElement('div');
