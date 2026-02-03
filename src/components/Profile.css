@@ -1,0 +1,49 @@
+:root {
+    --profilePhotoSize: 140px;
+    --cardLining: rgb(202, 202, 202);
+    --gaps: 14px;
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+.profileContainer {
+    margin-left: 420px;
+    width: 580px;
+    display: flex;
+    flex-direction: column;
+    /* gap: var(--gaps); */
+    /* border: 1px solid red; */
+}
+
+.profileBlock1 {
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid var(--cardLining);
+    padding: var(--gaps);
+}
+
+.profilePhoto {
+    height: var(--profilePhotoSize);
+    width: var(--profilePhotoSize);
+    border-radius: var(--profilePhotoSize);
+    border: 1px solid var(--cardLining);
+}
+
+.profileHeading {
+    padding: 0 calc(var(--gaps) * 2);
+}
+
+.profileHeading > p:nth-child(1){
+    font-weight: 600;
+    font-size: 28px;
+    margin: 0;
+}
+
+.profileBlock2 {
+    width: inherit;
+    border: 1px solid var(--cardLining);
+}
+

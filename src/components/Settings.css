@@ -1,0 +1,166 @@
+:root {
+    --cardLining: rgb(202, 202, 202);
+    --descriptionColor: rgb(150, 150, 150);
+    --cardRadius: 20px;
+    --gapBtwCards: 28px;
+    --blockSize: 580px;
+    --rowPadding: 15px 20px;
+    --descPadding: 8px 0 0 0;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+#container {
+    align-items: center;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gapBtwCards);
+}
+
+#container > div {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--cardLining);
+    border-radius: var(--cardRadius);
+    width: var(--blockSize);
+    box-shadow: 0 2px 8px rgb(202, 202, 202);
+    /* suggestions here */
+}
+
+#containerTitle {
+    border: none !important;
+    box-shadow: none !important;
+    align-items: left;
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: 0.5px;
+    padding: var(--rowPadding);
+    margin-bottom: -20px;
+}
+
+.heading {
+    font-weight: 600;
+    /* font-size: larger; */
+    /* suggestions here */
+
+}
+
+.description {
+    margin: 0;
+    padding: var(--descPadding);
+    min-height: 1rem;
+    max-height: none;
+    color: var(--descriptionColor);
+    /* border: 1px solid black; */
+}
+
+#container > div > div:first-child {
+    font-size: 24px;
+    padding: 15px 20px;
+}
+
+.deleteB, .blockB, .changeB {
+    display: flex;
+    align-items: center;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.deleteB svg, .blockB svg, .changeB svg{
+    margin-left: 8px; 
+    font-size: 18px;
+}
+
+.deleteB:hover, .blockB:hover, .changeB:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.deleteB:active, .blockB:active, .changeB:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blockB { background-color: #ff9137; }
+.deleteB { background-color: #ff292c; }
+.changeB { background-color: #41a3ff; }
+
+/* .deleteB:hover { background-color: #ff2a35;}
+.blockB:hover { background-color: #ff9e17; }
+.changeB:hover { background-color: #61adff; } */
+.deleteB:active { background-color: #b71c1c; }
+.blockB:active { background-color: #b76f1c; }
+.changeB:active { background-color: #084f9c; }
+
+/* this part starts the styling of inside of accountInfo box */
+
+div[class=row] {
+    border-top: 1px solid var(--cardLining);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--rowPadding);
+}
+
+.rowsLeftpart {
+    padding-right: var(--gapBtwCards);
+    max-width: 480px;
+}
+
+.title {
+    margin-bottom: -1px !important;
+}
+
+.rightArrowIcon {
+    color: var(--descriptionColor);
+    cursor: pointer; 
+    transition: transform 0.2s ease, color 0.2s ease;
+    /* transform: scale(2); */
+    font-size: 34px;
+    width: 45px;
+    margin-left: var(--gapBtwCards);
+    align-self: center;
+}
+
+.rightArrowIcon:hover {
+    color: #007bff;
+    /* transform: scale(2.4); */
+    transform: scale(1.3);
+}
+
+/* private button */
+.privateButtonOutline, .darkButtonOutline {
+    border: 1px solid var(--descriptionColor);
+    width: 40px;
+    height: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.privateButtonDot, .darkButtonDot {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    /* border: 1px solid black; */
+    background-color: white;
+    transition: 0.3s ease;
+}
+
+.buttonOff { margin: 1.5px;}
+.buttonOn { margin-left: 22px; margin-top: 1.5px;}
+
+.privateButtonOutline:has(.privateButtonDot.buttonOff) {background-color: red;}
+.privateButtonOutline:has(.privateButtonDot.buttonOn) {background-color: green;}
+.darkButtonOutline:has(.buttonOff) {background-color: red;}
+.darkButtonOutline:has(.buttonOn) {background-color: green;}
