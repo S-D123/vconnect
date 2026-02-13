@@ -1,6 +1,7 @@
 import SideBar from './SideBar';
 import data from '../exampleBlock/ex'
 import image from '../exampleBlock/1.png'
+
 import './HomePage.css'
 import { BsChatRightText, BsHandThumbsUp, BsShare } from 'react-icons/bs';
 

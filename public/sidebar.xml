@@ -1,0 +1,43 @@
+<sidebar>
+  <button>
+    <collapsedText>☰</collapsedText>
+    <expandedText>✕</expandedText>
+  </button>
+  <menuItems>
+    <menuItem>
+      <route>/home</route>
+      <icon>BsHouseDoor</icon>
+      <label>Home</label>
+    </menuItem>
+    <menuItem>
+      <route>/search</route>
+      <icon>BsSearch</icon>
+      <label>Search</label>
+    </menuItem>
+    <menuItem>
+      <route></route>
+      <icon>BsPlusLg</icon>
+      <label>Create(not button)</label>
+    </menuItem>
+    <menuItem>
+      <route>/notifications</route>
+      <icon>BsHeart</icon>
+      <label>Notifications</label>
+    </menuItem>
+    <menuItem>
+      <route>/settings</route>
+      <icon>BsGear</icon>
+      <label>Settings</label>
+    </menuItem>
+    <menuItem>
+      <route>/profile</route>
+      <icon>BsPerson</icon>
+      <label>Profile</label>
+    </menuItem>
+    <menuItem>
+      <route>/logout</route>
+      <icon>BsPower</icon>
+      <label>Logout</label>
+    </menuItem>
+  </menuItems>
+</sidebar>

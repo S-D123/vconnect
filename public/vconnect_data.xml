@@ -1,0 +1,27 @@
+<vconnect>
+    <item type="Club">
+        <name>Robotics Club</name>
+        <description>Building the future with AI and hardware.</description>
+        <category>Technology</category>
+    </item>
+    <item type="Club">
+        <name>Literature Society</name>
+        <description>For those who love books, poetry and drama.</description>
+        <category>Arts</category>
+    </item>
+    <item type="Event">
+        <name>Hackathon 2024</name>
+        <description>24-hour coding challenge for all students.</description>
+        <category>Competition</category>
+    </item>
+    <item type="Event">
+        <name>Annual Music Fest</name>
+        <description>Live performances by student bands.</description>
+        <category>Entertainment</category>
+    </item>
+    <item type="Club">
+        <name>Photography Club</name>
+        <description>Capturing moments, one shutter at a time.</description>
+        <category>Arts</category>
+    </item>
+</vconnect>
