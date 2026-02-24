@@ -6,6 +6,7 @@ import Profile from './components/Profile';
 import Settings from './components/Settings';
 import Search from './components/Search';
 import Notifications from './components/Notifications';
+import SignupPage from './components/SignupPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -19,6 +20,8 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/search" element={<Search />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/signup" element={<SignupPage />} />
+
       </Routes>
   );
 }

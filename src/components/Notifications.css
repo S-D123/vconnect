@@ -2,7 +2,7 @@
     margin-left: 420px;
     padding: 24px;
     max-width: 900px;
-    color: #222;
+    color: var(--text);
 }
 
 .notificationsHeader {
@@ -12,40 +12,13 @@
     margin-bottom: 12px;
 }
 
-.headerLeft h2 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.smallMuted {
-    display: block;
-    font-size: 12px;
-    color: #7a7a7a;
-    margin-top: 4px;
-}
-
 .headerActions {
     display: flex;
     gap: 8px;
 }
 
-.actionBtn {
-    background: #f0f2ff;
-    border: none;
-    padding: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #2434ff;
-}
-
-.actionBtn.danger {
-    background: #ffecec;
-    color: #c62828;
-}
-
 .notifCard {
-    background: #fff;
+    background: var(--vis);
     border: 1px solid rgba(0,0,0,0.06);
     border-radius: 12px;
     padding: 8px;
@@ -67,7 +40,7 @@
 }
 
 .notifItem:hover {
-    background: #fafafa;
+    background: var(--visHover);
     transform: translateY(-2px);
 }
 
@@ -104,7 +77,7 @@
 .title {
     font-weight: 600;
     font-size: 14px;
-    color: #111;
+    color: var(--text);
 }
 
 .time {
@@ -146,4 +119,75 @@
 .emptyState p {
     margin-top: 10px;
     font-size: 14px;
+}
+
+/* cutom buttons */
+
+.button-container {
+  display: flex;
+  gap: 16px;
+  padding: 8px;
+  font-family: sans-serif;
+}
+
+/* Base Button Styling */
+.btn {
+  position: relative;
+  cursor: pointer;
+  padding: 5px 12px;
+  font-weight: 700;
+  border-radius: 12px;
+  border: none;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  user-select: none;
+}
+
+/* 1. The "Squishy" Success Button */
+.btn-read {
+  background-color: #10b981; 
+  color: white;
+  box-shadow: 0 4px 0 0 #059669;
+  height: 1.5rem;
+}
+
+.btn-read:hover {
+  background-color: #34d399; 
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 #059669;
+}
+
+.btn-read:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 #059669;
+  scale: 0.96;
+}
+
+.btn-clear {
+  background-color: transparent;
+  color: #f43f5e; 
+  border: 2px solid #f43f5e;
+  overflow: hidden; /* Keeps the text swap tidy */
+}
+
+.btn-clear .hover-text {
+  display: none;
+}
+
+.btn-clear:hover {
+  background-color: #fff1f2; 
+  color: #e11d48; 
+}
+
+/* Text swap logic */
+.btn-clear:hover .default-text {
+  display: none;
+}
+
+.btn-clear:hover .hover-text {
+  display: inline;
+}
+
+.btn-clear:active {
+  scale: 0.95;
+  background-color: #ffe4e6;
 }

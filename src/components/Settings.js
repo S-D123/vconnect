@@ -4,21 +4,27 @@ import "./Settings.css"
 import { GoChevronRight } from "react-icons/go";
 import { MdDelete, MdBlock } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import useThemeNoStorage from "../hooks/useThemeNoStorage";
 
 export default function Settings() {
     
     const [isPrivate, setIsPrivate] = useState(false);
-    const [isDark, setIsDark] = useState(false);
-
+    const [theme, toggleTheme] = useThemeNoStorage();
+    const [isDark, setIsDark] = useState(theme === 'dark' ? true : false);
+    const [allNotif, setAllNotif] = useState(true);
+    const [clubPostNotif, setClubPostNotif] = useState(true);
+    const [userCommentNotif, setUserCommentNotif] = useState(true);
+    
     const privateButtonPressed = () => {
         const userConfirmed = window.confirm("Are you sure you want to make this change?");
         if (userConfirmed) {
             setIsPrivate(!isPrivate);
         }
     }
-
+    
     const darkButtonPressed = () => {
         setIsDark(!isDark);
+        toggleTheme();
     }
 
     return (
@@ -105,6 +111,36 @@ export default function Settings() {
                     </div>
                 </div>
 
+                <div id='notifications'>
+                    <div class='heading title'>Notifications</div>
+                    <div class='row'>
+                        <div class='rowsLeftPart'>
+                            <div class="heading">All Notifications</div>
+                            <div class='description'>Turn on/off all notifications</div>
+                        </div>
+                        <div class='darkButtonOutline' onClick={() => setAllNotif(!allNotif)}>
+                            <div className={`darkButtonDot ${allNotif ? "buttonOn" : "buttonOff"}`}></div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='rowsLeftPart'>
+                            <div class="heading">Club Post Notification</div>
+                            <div class='description'>Get noitified whenever any club posts</div>
+                        </div>
+                        <div class='darkButtonOutline' onClick={() => setClubPostNotif(!clubPostNotif)}>
+                            <div className={`darkButtonDot ${clubPostNotif ? "buttonOn" : "buttonOff"}`}></div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='rowsLeftPart'>
+                            <div class="heading">Comment Notification(for Clubs)</div>
+                            <div class='description'>Get notified when any student comments on club's posts</div>
+                        </div>
+                        <div class='darkButtonOutline' onClick={() => setUserCommentNotif(!userCommentNotif)}>
+                            <div className={`darkButtonDot ${userCommentNotif ? "buttonOn" : "buttonOff"}`}></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );

@@ -1,11 +1,7 @@
-/* ...existing code... */
-
-/* Search bar styles */
 .searchContainer {
     padding: 24px;
     max-width: 980px;
     margin-left: 420px; /* keep consistent with your layout */
-    color: #222;
 }
 
 .searchBar {
@@ -42,6 +38,7 @@
     cursor: pointer;
     font-weight: 600;
     white-space: nowrap;
+    height: 42px;
 }
 
 .searchButton:hover {
@@ -55,12 +52,12 @@
     cursor: pointer;
     font-size: 16px;
     padding: 6px;
-    color: #6b6b6b;
+    color: black;
 }
 
 /* Results */
 .searchHelp {
-    color: #666;
+    color: var(--text);
     margin-bottom: 8px;
 }
 
@@ -70,14 +67,14 @@
 
 .resultItem {
     padding: 12px;
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--border);
     border-radius: 8px;
     margin-bottom: 8px;
-    background: #fff;
+    background: var(--vis);
     box-shadow: 0 1px 2px rgba(0,0,0,0.03);
 }
 
 .noResults {
-    color: #777;
+    color: var(--text);
     font-style: italic;
 }

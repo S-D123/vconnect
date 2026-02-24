@@ -1,150 +1,135 @@
-@import './variables.css';
-
-:root {
-    --loginCardRadius: 12px;
-    --loginImageSize: 400px;
-    --loginCardBgColor: #ddd;
-    --inputFieldFont: 18px;
-    --inputFieldPadding: 0 15px;
-    --fontLoginColor: #444;
-	  --activeColour: rgb(84, 104, 255);
+:root{
+  --bg: #ffffff;
+  --surface: #f8fafc;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #3b82f6;
+  --radius: 10px;
+  --shadow: 0 6px 18px rgba(2,6,23,0.08);
 }
 
-*, *::after, *::before {
-    box-sizing: border-box;
+.dark {
+  --bg: #0b1220;
+  --surface: #0f1724;
+  --text: #e6eef8;
+  --muted: #9aa6b2;
+  --accent: #60a5fa;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
-    overflow-x: hidden;
-    /* background-color: var(--bgColor); */
-    /* color: var(--fontColor); */
-    /* To prevent Horizontal scrolling */
+.login-form {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  color: var(--text);
+  margin-top: 150px;
 }
 
-.loginContainer {
-    background-color: var(--loginCardBgColor);
-    width: fit-content;
-    height: fit-content;
-    padding: 15px;
-    border-radius: var(--loginCardRadius);
-    display: flex;
-    flex-direction: row;
-    margin: 150px auto;
-    /* box-shadow: 0 0 10px 2px rgba(202, 202, 202, 1); */
-
-	/* temp */
-	box-shadow: 0 0 10px 2px #bbb;
+.card {
+  width: 420px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.04);
 }
 
-.loginImg {
-    width: var(--loginImageSize);
-    height: var(--loginImageSize);
-    border-radius: var(--loginCardRadius);
-    border: 2px solid #ccc;
+.card-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
 }
 
-.loginPart {
-    height: var(--loginImageSize);
-    width: var(--loginImageSize);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+.card-title {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
-.loginPart > div > p:nth-child(1) {
-	font-size: 30px;
-	font-weight: 600;
-	padding: 0;
-	margin: 0;
-	color: var(--fontLoginColor);
+.card-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
 }
 
-.loginPart > div > p:nth-child(2) {
-	font-size: 20px;
-	font-weight: 500;
-	padding-top: 10px;
-	margin: 0;
-	color: var(--fontLoginColor);
+.card-content {
+  padding: 18px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-row {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
 }
 
-
-.loginTitle {
-	color: var(--fontLoginColor);
-    font-weight: 600;
-    font-size: 24px;
-    font-family: Arial;
-	/* border: 1px solid white; */
+.field-label {
+  font-weight: 600;
+  font-size: 13px;
 }
 
-.loginButton {
-	width: 7rem;
-	display: flex;
-	gap: 0.5rem;
-	justify-content: center;
-	align-items: center;
-	font-size: 20px;
-	padding: 8px;
-	/* border: 2px solid #444; */
-	border-radius: 24px;
-	transition: 0.3s ease;
-	/* background-color: #758cff; */
-	background-color: var(--activeColour);
-	color: white;
-}
-
-.loginButton:hover {
-	cursor: pointer;
-	transform: translateY(-3px);
-	background-color: blue;
-}
-
-/* testing */
-
-.inputField {
-  position: relative;
-
-}
-
-.inputField input {
-  width: 330px;
-  height: 50px;
-  padding: var(--inputFieldPadding);
-  border: 2px solid black;
-  border-radius: 6px;
-  background-color: transparent;
+.input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  font-size: 14px;
   outline: none;
-  color: var(--fontLoginColor);
-  font-size: var(--inputFieldFont);
+  transition: box-shadow .12s, border-color .12s;
 }
 
-.inputField label {
-  color: var(--fontLoginColor);
-  position: absolute;
-  top: 15px;
-  left: 0px;
-  transition: 0.3s ease;
-  font-size: var(--inputFieldFont);
-  padding: var(--inputFieldPadding);
-  pointer-events: none;
+.input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 6px 18px rgba(59,130,246,0.12);
 }
 
-.loginEmail:focus {border: 2px solid var(--activeColour);}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
 
-.inputField input:focus + label,
-.inputField input:not(:placeholder-shown) + label {
-  top: -8px;
-  left: 10px;
-  font-size: 16px;
-  color: var(--fontLoginColor);
-  background: var(--loginCardBgColor);
-  padding: 0 5px;
+.btn {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-outline {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.field-description {
+  margin: 6px 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.forgot {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.info-icon {
+  margin-left: 20px;
+  transform: scale(1.5);
 }

@@ -34,12 +34,18 @@ export default function Notifications() {
             <div className="notificationsContainer">
                 <div className="notificationsHeader">
                     <div className="headerLeft">
-                        <h2>Notifications</h2>
-                        <span className="smallMuted">Recent activity</span>
+                        <div id='containerTitle'>Notifications</div>
                     </div>
                     <div className="headerActions">
-                        <button className="actionBtn" onClick={markAllRead} title="Mark all read"><FiCheck /></button>
-                        <button className="actionBtn danger" onClick={clearAll} title="Clear all"><FiX /></button>
+                        <div class="button-container">
+                            <button class="btn btn-clear" onClick={clearAll}>
+                                <span class="default-text">Clear All</span>
+                                <span class="hover-text">Are you sure? 🗑️</span>
+                            </button>
+                            <button class="btn btn-read" onClick={markAllRead}>
+                                Mark Everything Read
+                            </button>
+                        </div>
                     </div>
                 </div>
 

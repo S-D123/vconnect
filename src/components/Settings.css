@@ -1,5 +1,6 @@
+@import './variables.css';
+
 :root {
-    --cardLining: rgb(202, 202, 202);
     --descriptionColor: rgb(150, 150, 150);
     --cardRadius: 20px;
     --gapBtwCards: 28px;
@@ -23,10 +24,10 @@ body {
 #container > div {
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--cardLining);
+    border: 1px solid var(--borderLiningColor);
     border-radius: var(--cardRadius);
     width: var(--blockSize);
-    box-shadow: 0 2px 8px rgb(202, 202, 202);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
     /* suggestions here */
 }
 
@@ -36,16 +37,16 @@ body {
     align-items: left;
     font-weight: 600;
     font-size: 28px;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     padding: var(--rowPadding);
     margin-bottom: -20px;
 }
 
 .heading {
     font-weight: 600;
+    color: var(--text);
     /* font-size: larger; */
     /* suggestions here */
-
 }
 
 .description {
@@ -73,7 +74,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .deleteB svg, .blockB svg, .changeB svg{
@@ -82,13 +83,13 @@ body {
 }
 
 .deleteB:hover, .blockB:hover, .changeB:hover {
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px);
 }
 
 .deleteB:active, .blockB:active, .changeB:active {
     transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .blockB { background-color: #ff9137; }
@@ -105,7 +106,7 @@ body {
 /* this part starts the styling of inside of accountInfo box */
 
 div[class=row] {
-    border-top: 1px solid var(--cardLining);
+    border-top: 1px solid var(--borderLiningColor);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -141,9 +142,9 @@ div[class=row] {
 
 /* private button */
 .privateButtonOutline, .darkButtonOutline {
-    border: 1px solid var(--descriptionColor);
+    border: 1px solid gray;
     width: 40px;
-    height: 20px;
+    height: 21px;
     border-radius: 20px;
     cursor: pointer;
 }
@@ -157,8 +158,8 @@ div[class=row] {
     transition: 0.3s ease;
 }
 
-.buttonOff { margin: 1.5px;}
-.buttonOn { margin-left: 22px; margin-top: 1.5px;}
+.buttonOff { margin: 2px;}
+.buttonOn { margin-left: 22px; margin-top: 2px;}
 
 .privateButtonOutline:has(.privateButtonDot.buttonOff) {background-color: red;}
 .privateButtonOutline:has(.privateButtonDot.buttonOn) {background-color: green;}

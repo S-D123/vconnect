@@ -1,4 +1,5 @@
 import SideBar from './SideBar';
+import useThemeNoStorage from '../hooks/useThemeNoStorage';
 import data from '../exampleBlock/ex'
 import image from '../exampleBlock/1.png'
 
@@ -9,13 +10,19 @@ import { BsChatRightText, BsHandThumbsUp, BsShare } from 'react-icons/bs';
 // there is a sidebar that shows student participation
 
 export default function HomePage() {
+  const [theme, toggleTheme, resetToSystem] = useThemeNoStorage();
 
   return (
     <>
       <SideBar />
+      {/* Minimal theme toggle (no persistence) */}
+      <div class='themeControl' style={{ padding: '8px 16px' }}>
+        <button class='themeToggle' onClick={toggleTheme} aria-label='Toggle theme'>
+          {theme === 'dark' ? 'dark' : 'light'}
+        </button>
+      </div>
       <div class='container'>
-        <h2>Home Page</h2>
-        {/* <p>Welcome to the home page!</p> */}
+        <div id='containerTitle'>Home Page</div>
 
         <div class="cardOuter">
           <img class='cardImage' src={image} />

@@ -17,7 +17,7 @@
     <menuItem>
       <route></route>
       <icon>BsPlusLg</icon>
-      <label>Create(not button)</label>
+      <label>Create(for club)</label>
     </menuItem>
     <menuItem>
       <route>/notifications</route>

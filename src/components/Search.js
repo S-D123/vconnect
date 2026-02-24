@@ -53,7 +53,7 @@ export default function Search() {
         <>
             <SideBar />
             <div className="searchContainer">
-                <h2>Search Page</h2>
+                <div id='containerTitle'>Search Page</div>
 
                 <form className="searchBar" onSubmit={onSubmit}>
                     <input
