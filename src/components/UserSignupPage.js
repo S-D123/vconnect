@@ -1,76 +1,76 @@
 import React, { useState } from 'react';
-import './LoginPage.css';
+import './LoginPage.css'; // Reusing your existing CSS
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function LoginPage() {
+export default function UserSignupPage() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
-  
-  const handleLogin = async (e) => {
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    const name = formData.get('name');
     const email = formData.get('email');
     const password = formData.get('password');
-    
+
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email, password }),
       });
 
       const parseRes = await response.json();
 
       if (response.ok) {
-        // Save the JWT token and user details to local storage
+        // Automatically log them in after registration
         localStorage.setItem('token', parseRes.token);
         localStorage.setItem('user', JSON.stringify(parseRes.user));
-        
-        // Redirect to the home page
         navigate('/home');
       } else {
-        // Display the error message from the backend (e.g., "Password or Email is incorrect")
-        setError(parseRes);
+        setError(parseRes); // e.g., "User already exists!"
       }
     } catch (err) {
       console.error(err.message);
       setError('Server error. Please try again later.');
     }
-  }
-  
+  };
+
   return (
     <div className='login-form'>
       <div className="card">
         <div className="card-header">
-          <h3 className="card-title">Login to your account</h3>
+          <h3 className="card-title">Create an Account</h3>
           <p className="card-description">
-            Enter your email below to login to your account
+            Sign up to join the campus community
           </p>
         </div>
 
         <div className="card-content">
-          <form className="form" onSubmit={handleLogin}>
+          <form className="form" onSubmit={handleRegister}>
             {error && <p style={{ color: 'red', fontSize: '14px', marginBottom: '10px' }}>{error}</p>}
             <div className="field-group">
+              
+              <div className="field">
+                <label htmlFor="name" className="field-label">Full Name</label>
+                <input id="name" name="name" type="text" className="input" placeholder="John Doe" required />
+              </div>
+
               <div className="field">
                 <label htmlFor="email" className="field-label">Email</label>
                 <input id="email" name="email" type="email" className="input" placeholder="m@example.com" required />
               </div>
 
               <div className="field">
-                <div className="field-row">
-                  <label htmlFor="password" className="field-label">Password</label>
-                  <a href="#" className="forgot">Forgot your password?</a>
-                </div>
-                <input id="password" name="password" type="password" className="input" required placeholder='password'/>
+                <label htmlFor="password" className="field-label">Password</label>
+                <input id="password" name="password" type="password" className="input" required placeholder='Create a secure password'/>
               </div>
 
               <div className="field actions">
-                <button type="submit" className="btn">Login</button>
-                <p className="field-description">Don't have an account? <Link to="/register">Sign up as a Student</Link></p>
-                <p className="field-description">Want to register a new club? <Link to="/signup">Click here</Link></p>
+                <button type="submit" className="btn">Sign Up</button>
+                <p className="field-description">Already have an account? <Link to="/login">Login here</Link></p>
               </div>
             </div>
           </form>
