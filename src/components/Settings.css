@@ -40,6 +40,7 @@ body {
     letter-spacing: 1px;
     padding: var(--rowPadding);
     margin-bottom: -20px;
+    padding-bottom: 30px;
 }
 
 .heading {

@@ -60,10 +60,10 @@ export default function ProfileHeader() {
 // Styles Object
 const styles = {
   profileCard: {
-    backgroundColor: '#fff',
-    border: '1px solid #e5e7eb',
+    backgroundColor: 'var(--bg)',
+    border: '1px solid var(--border)',
     borderRadius: '16px',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+    // boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
     maxWidth: '800px',
     margin: '20px auto',
     fontFamily: 'sans-serif',
@@ -73,7 +73,7 @@ const styles = {
   },
   profileLayout: {
     display: 'flex',
-    flexDirection: 'row', // Defaulting to row for this example
+    flexDirection: 'row',
     alignItems: 'center',
     gap: '24px',
     flexWrap: 'wrap'
@@ -100,7 +100,7 @@ const styles = {
     height: '32px',
     width: '32px',
     borderRadius: '50%',
-    border: '1px solid #e5e7eb',
+    border: '1px solid var(--bg)',
     backgroundColor: 'white',
     display: 'flex',
     alignItems: 'center',
@@ -120,7 +120,7 @@ const styles = {
     fontSize: '24px',
     fontWeight: '700',
     margin: 0,
-    color: '#111827',
+    color: 'var(--text)',
   },
   badge: {
     backgroundColor: '#f3f4f6',
@@ -131,14 +131,14 @@ const styles = {
     fontWeight: '500',
   },
   profileTitle: {
-    color: '#6b7280',
+    color: 'var(--text1)',
     margin: '4px 0 12px 0',
   },
   metadataRow: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '16px',
-    color: '#6b7280',
+    color: 'var(--text2)',
     fontSize: '14px',
   },
   metaItem: {
@@ -149,7 +149,7 @@ const styles = {
   /* Primary Button States */
   btnPrimary: {
     padding: '10px 24px',
-    backgroundColor: '#18181b',
+    backgroundColor: 'var(--accent)',
     color: 'white',
     fontWeight: '600',
     borderRadius: '10px',
@@ -158,7 +158,7 @@ const styles = {
     transition: 'all 0.2s ease',
   },
   btnPrimaryHover: {
-    backgroundColor: '#27272a',
+    // backgroundColor: 'var()',
     transform: 'translateY(-2px)',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
   },

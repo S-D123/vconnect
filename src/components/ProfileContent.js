@@ -54,25 +54,26 @@ const styles = {
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
   },
   card: {
-    backgroundColor: '#fff',
-    border: '1px solid #e4e4e7',
-    // borderRadius: '12px',
+    backgroundColor: 'var(--bg)',
+    border: '1px solid var(--border)',
+    borderRadius: '12px',
     marginBottom: '24px',
     overflow: 'hidden',
+    color: 'var(--text)'
   },
   cardHeader: {
     padding: '24px',
-    borderBottom: '1px solid #f4f4f5',
+    borderBottom: '1px solid var(--border)',
   },
   cardTitle: {
     fontSize: '20px',
     fontWeight: '600',
     margin: '0 0 4px 0',
-    color: '#18181b',
+    color: 'var(--text)'
   },
   cardDescription: {
     fontSize: '14px',
-    color: '#71717a',
+    color: 'var(--text2)',
     margin: 0,
   },
   cardContent: {
@@ -91,17 +92,17 @@ const styles = {
   label: {
     fontSize: '14px',
     fontWeight: '500',
-    color: '#18181b',
+    color: 'var(--text)'
   },
   input: {
     padding: '8px 12px',
-    // borderRadius: '6px',
+    borderRadius: '6px',
     border: '1px solid #e4e4e7',
     fontSize: '14px',
   },
   textarea: {
     padding: '12px',
-    // borderRadius: '6px',
+    borderRadius: '6px',
     border: '1px solid #e4e4e7',
     fontSize: '14px',
     resize: 'vertical',

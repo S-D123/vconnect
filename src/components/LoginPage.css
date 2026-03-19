@@ -1,20 +1,14 @@
 :root{
-  --bg: #ffffff;
   --surface: #f8fafc;
-  --text: #111827;
-  --muted: #6b7280;
-  --accent: #3b82f6;
   --radius: 10px;
-  --shadow: 0 6px 18px rgba(2,6,23,0.08);
+  --shadow: 0 6px 18px rgba(25, 29, 44, 0.08);
+  --bgLogin: #223;
 }
 
 .dark {
-  --bg: #0b1220;
   --surface: #0f1724;
-  --text: #e6eef8;
-  --muted: #9aa6b2;
-  --accent: #60a5fa;
 }
+
 
 .login-form {
   display: flex;
@@ -85,6 +79,7 @@
   font-size: 14px;
   outline: none;
   transition: box-shadow .12s, border-color .12s;
+  color: #e6e6e6;
 }
 
 .input:focus {
