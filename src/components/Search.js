@@ -1,106 +1,102 @@
 import React, { useState, useEffect } from 'react';
-import './Search.css';
-import SideBar from "./SideBar";
+import SideBar from './SideBar';
+import './Search.css'; // Optional: if you have specific search styles
+import './HomePage.css'; // Reusing existing card styles
 
 export default function Search() {
-    const [query, setQuery] = useState('');
-    const [results, setResults] = useState([]);
-    const [allData, setAllData] = useState([]); // Stores all data from XML
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState({ users: [], clubs: [] });
+  const [loading, setLoading] = useState(false);
 
-    // 1. Fetch and Parse XML when the page loads
-    useEffect(() => {
-        fetch('/vconnect_data.xml')
-            .then(response => response.text())
-            .then(str => {
-                // Parse the XML string
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(str, "text/xml");
-                
-                // Extract all <item> tags
-                const items = Array.from(xmlDoc.getElementsByTagName("item"));
-                
-                // Convert XML nodes to a JavaScript array
-                const parsedData = items.map(item => ({
-                    type: item.getAttribute("type"), // Read <item type="...">
-                    name: item.getElementsByTagName("name")[0].textContent,
-                    description: item.getElementsByTagName("description")[0].textContent,
-                    category: item.getElementsByTagName("category")[0].textContent
-                }));
+  // Use a simple debounce so we don't spam the database on every single keystroke
+  useEffect(() => {
+    const fetchResults = async () => {
+      if (searchTerm.trim() === '') {
+        setResults({ users: [], clubs: [] });
+        return;
+      }
 
-                setAllData(parsedData);
-            })
-            .catch(err => console.error("Error reading XML:", err));
-    }, []);
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        
-        if (!query) {
-            setResults([]);
-            return;
-        }
-
-        // 2. Filter the data based on the search query
-        const filtered = allData.filter(item => 
-            item.name.toLowerCase().includes(query.toLowerCase()) || 
-            item.category.toLowerCase().includes(query.toLowerCase())
-        );
-
-        setResults(filtered);
+      setLoading(true);
+      try {
+        const response = await fetch(`http://localhost:5000/api/search?q=${encodeURIComponent(searchTerm)}`);
+        const data = await response.json();
+        setResults(data);
+      } catch (err) {
+        console.error('Search failed', err);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    return (
-        <>
-            <SideBar />
-            <div className="searchContainer">
-                <div id='containerTitle'>Search Page</div>
+    const delayDebounceFn = setTimeout(() => {
+      fetchResults();
+    }, 300); // Waits 300ms after the user stops typing before fetching
 
-                <form className="searchBar" onSubmit={onSubmit}>
-                    <input
-                        type="search"
-                        className="searchInput"
-                        placeholder="Search events, clubs, or categories..."
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                    />
-                    <button type="submit" className="searchButton">Search</button>
-                </form>
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
 
-                <p className="searchHelp">
-                    Try searching for "Robotics", "Arts", or "Hackathon".
-                </p>
+  return (
+    <>
+      <SideBar />
+      <div className='container' style={{ marginLeft: '70px', paddingBottom: '50px' }}>
+        <div id='containerTitle'>Search Community</div>
 
-                <div className="searchResults">
-                    {results.length === 0 ? (
-                        <div className="noResults">
-                            {query ? "No results found" : "Enter a keyword to search"}
-                        </div>
-                    ) : (
-                        results.map((item, index) => (
-                            <div key={index} className="resultItem">
-                                {/* Displaying the data cleanly */}
-                                <div style={{fontWeight: 'bold', fontSize: '1.1em'}}>
-                                    {item.name} 
-                                    <span style={{
-                                        fontSize: '0.8em', 
-                                        backgroundColor: '#e0e0e0', 
-                                        padding: '2px 8px', 
-                                        borderRadius: '10px', 
-                                        marginLeft: '10px',
-                                        color: '#555'
-                                    }}>
-                                        {item.type}
-                                    </span>
-                                </div>
-                                <div style={{color: '#666', marginTop: '4px'}}>{item.description}</div>
-                                <div style={{fontSize: '0.9em', color: '#888', marginTop: '4px'}}>
-                                    Category: {item.category}
-                                </div>
-                            </div>
-                        ))
-                    )}
+        {/* Search Input Box */}
+        <div className="cardOuter" style={{ marginBottom: '20px', padding: '15px' }}>
+          <input 
+            type="text" 
+            placeholder="Search for students or clubs..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{ width: '100%', padding: '12px', fontSize: '16px', borderRadius: '8px', border: '1px solid #ccc' }}
+          />
+        </div>
+
+        {loading && <p>Searching...</p>}
+
+        {/* Display Club Results */}
+        {results.clubs.length > 0 && (
+          <div style={{ marginBottom: '30px' }}>
+            <h3>Clubs</h3>
+            {results.clubs.map(club => (
+              <div className="cardOuter" key={club.id} style={{ marginBottom: '10px', padding: '15px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+                <div style={{ width: '50px', height: '50px', backgroundColor: '#e0e0e0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  🏢
                 </div>
-            </div>
-        </>
-    );
+                <div>
+                  <h4 style={{ margin: '0 0 5px 0' }}>{club.name}</h4>
+                  <p style={{ margin: '0', fontSize: '14px', color: '#666' }}>{club.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Display User Results */}
+        {results.users.length > 0 && (
+          <div>
+            <h3>Students</h3>
+            {results.users.map(user => (
+              <div className="cardOuter" key={user.id} style={{ marginBottom: '10px', padding: '15px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+                <img 
+                  src={user.profile_image || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} 
+                  alt="Profile" 
+                  style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover' }} 
+                />
+                <div>
+                  <h4 style={{ margin: '0 0 5px 0' }}>{user.name}</h4>
+                  <p style={{ margin: '0', fontSize: '14px', color: '#666' }}>{user.email}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Empty State */}
+        {searchTerm && !loading && results.users.length === 0 && results.clubs.length === 0 && (
+          <p>No results found for "{searchTerm}".</p>
+        )}
+      </div>
+    </>
+  );
 }

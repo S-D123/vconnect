@@ -123,3 +123,97 @@
   height: var(--button-size);
   margin: 10px;
 }
+
+/* Modernized Post Card */
+.cardOuter {
+    background-color: var(--background-primary, #ffffff);
+    color: var(--text-primary, #333333);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Softer shadow */
+    border: 1px solid var(--border-color, #eaeaea);
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Keeps images inside borders */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cardOuter:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.cardImage {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color, #eaeaea);
+}
+
+.description {
+    padding: 20px;
+}
+
+.lineContainer1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary, #111);
+}
+
+.eventDate {
+    font-size: 0.85rem;
+    color: var(--text-muted, #777);
+}
+
+.eventDescription {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-secondary, #444);
+    margin-top: 10px;
+}
+
+/* Action Bar (Author and Buttons) */
+.separator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color, #eaeaea);
+    background-color: var(--background-secondary, #fafafa);
+}
+
+.author p {
+    margin: 0;
+}
+
+.institute {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary, #333);
+}
+
+.club {
+    font-size: 0.8rem;
+    color: var(--text-muted, #777);
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.buttons > div {
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.buttons > div:hover {
+    background-color: var(--hover-color, rgba(0, 0, 0, 0.05));
+}
