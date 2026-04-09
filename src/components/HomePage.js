@@ -75,7 +75,10 @@ export default function HomePage() {
     }
   };
 
-  // Toggle Like on a post
+  // --- ADD THIS STATE ---
+  const [likedPosts, setLikedPosts] = useState(new Set()); 
+
+  // --- UPDATE THE handleLike FUNCTION ---
   const handleLike = async (postId) => {
     try {
       const token = localStorage.getItem('token');
@@ -96,17 +99,21 @@ export default function HomePage() {
       if (response.ok) {
         const result = await response.json();
         
-        // Update the post array in state to reflect the new like count instantly
         setPosts(posts.map(post => {
           if (post.id === postId) {
             let currentCount = parseInt(post.like_count) || 0;
-            return {
-              ...post,
-              like_count: result.liked ? currentCount + 1 : currentCount - 1
-            };
+            return { ...post, like_count: result.liked ? currentCount + 1 : currentCount - 1 };
           }
           return post;
         }));
+
+        // --- NEW: UPDATE THE LIKED BUTTON COLOR STATE ---
+        setLikedPosts(prev => {
+          const newSet = new Set(prev);
+          if (result.liked) newSet.add(postId);
+          else newSet.delete(postId);
+          return newSet;
+        });
       }
     } catch (err) {
       console.error('Failed to toggle like', err);
@@ -148,33 +155,57 @@ export default function HomePage() {
                   <p id='club' className='club'>{post.club_name || 'General Community'}</p>
                 </div>
                 <div className='buttons'>
-                  {/* Updated Like Button */}
-                  <div id='like' onClick={() => handleLike(post.id)} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <BsHandThumbsUp className='eachButtons' />
-                    <span style={{ fontSize: '14px', color: '#555' }}>{post.like_count || 0}</span>
+                  {/* Updated Like Button with Color Toggle */}
+                  <div id='like' onClick={() => handleLike(post.id)} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <BsHandThumbsUp 
+                      className='eachButtons' 
+                      style={{ 
+                        color: likedPosts.has(post.id) ? '#0a66c2' : 'inherit', // Turns LinkedIn Blue when liked
+                        transform: likedPosts.has(post.id) ? 'scale(1.1)' : 'scale(1)',
+                        transition: 'all 0.2s ease-in-out'
+                      }} 
+                    />
+                    <span style={{ fontSize: '14px', fontWeight: likedPosts.has(post.id) ? 'bold' : 'normal', color: likedPosts.has(post.id) ? '#0a66c2' : 'var(--text-color)' }}>
+                      {post.like_count || 0}
+                    </span>
                   </div>
                   
-                  <div id='share'><BsShare className='eachButtons' /></div>
-                  <div id='comment' onClick={() => toggleComments(post.id)} style={{ cursor: 'pointer' }}>
+                  <div id='share' style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <BsShare className='eachButtons' />
+                    <span style={{ fontSize: '14px' }}>Share</span>
+                  </div>
+                  <div id='comment' onClick={() => toggleComments(post.id)} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <BsChatRightText className='eachButtons' />
+                    <span style={{ fontSize: '14px' }}>Comment</span>
                   </div>
                 </div>
               </div>
 
-              {/* COMMENTS SECTION */}
+              {/* REFINED COMMENTS SECTION */}
               {activeCommentPost === post.id && (
-                <div style={{ padding: '15px', borderTop: '1px solid #ddd', backgroundColor: '#f9f9f9', borderRadius: '0 0 10px 10px' }}>
-                  <h4 style={{ margin: '0 0 10px 0', fontSize: '14px' }}>Comments</h4>
+                <div className="comments-section" style={{ 
+                  padding: '15px 20px', 
+                  borderTop: '1px solid var(--border-color, #e0e0e0)', 
+                  backgroundColor: 'var(--background-secondary, #f8f9fa)', // Adapts to theme
+                  borderRadius: '0 0 12px 12px' 
+                }}>
                   
                   {/* List existing comments */}
-                  <div style={{ maxHeight: '150px', overflowY: 'auto', marginBottom: '10px' }}>
+                  <div style={{ maxHeight: '200px', overflowY: 'auto', marginBottom: '15px' }}>
                     {comments.length === 0 ? (
-                      <p style={{ fontSize: '12px', color: '#666' }}>No comments yet. Be the first!</p>
+                      <p style={{ fontSize: '13px', color: 'var(--text-muted, #888)', fontStyle: 'italic' }}>Be the first to comment!</p>
                     ) : (
                       comments.map(comment => (
-                        <div key={comment.id} style={{ marginBottom: '8px', fontSize: '13px' }}>
-                          <strong>{comment.author_name}: </strong> 
-                          <span>{comment.content}</span>
+                        <div key={comment.id} style={{ 
+                          marginBottom: '10px', 
+                          backgroundColor: 'var(--background-primary, #ffffff)', 
+                          padding: '10px 15px', 
+                          borderRadius: '10px',
+                          border: '1px solid var(--border-color, #eee)',
+                          color: 'var(--text-primary, #333)' // Ensures text is always visible
+                        }}>
+                          <strong style={{ fontSize: '13px', display: 'block', marginBottom: '3px' }}>{comment.author_name}</strong> 
+                          <span style={{ fontSize: '14px' }}>{comment.content}</span>
                         </div>
                       ))
                     )}
@@ -187,9 +218,29 @@ export default function HomePage() {
                       value={newCommentText} 
                       onChange={(e) => setNewCommentText(e.target.value)}
                       placeholder="Write a comment..." 
-                      style={{ flex: 1, padding: '8px', borderRadius: '5px', border: '1px solid #ccc' }}
+                      style={{ 
+                        flex: 1, 
+                        padding: '10px 15px', 
+                        borderRadius: '20px', 
+                        border: '1px solid var(--border-color, #ccc)',
+                        outline: 'none',
+                        backgroundColor: 'var(--background-primary, #ffffff)',
+                        color: 'var(--text-primary, #333)'
+                      }}
                     />
-                    <button type="submit" style={{ padding: '8px 15px', borderRadius: '5px', backgroundColor: '#007bff', color: 'white', border: 'none', cursor: 'pointer' }}>
+                    <button type="submit" style={{ 
+                      padding: '8px 20px', 
+                      borderRadius: '20px', 
+                      backgroundColor: '#0a66c2', 
+                      color: 'white', 
+                      fontWeight: 'bold',
+                      border: 'none', 
+                      cursor: 'pointer',
+                      transition: 'background-color 0.2s'
+                    }}
+                    onMouseOver={(e) => e.target.style.backgroundColor = '#004182'}
+                    onMouseOut={(e) => e.target.style.backgroundColor = '#0a66c2'}
+                    >
                       Post
                     </button>
                   </form>

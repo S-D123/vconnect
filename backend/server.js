@@ -18,6 +18,9 @@ app.use('/api/comments', require('./routes/comments'));
 app.use('/api/reactions', require('./routes/reactions'));
 app.use('/api/events', require('./routes/events'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/upload', require('./routes/upload'));
+app.use('/api/search', require('./routes/search'));
+app.use('/api/admin', require('./routes/admin'));
 
 // A simple test route to verify the server is running
 app.get('/api/health', (req, res) => {
